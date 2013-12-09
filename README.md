@@ -1,6 +1,8 @@
 # LiteConfig
 
-TODO: Write a gem description
+LiteConfig automates the loading of Rails-style YAML config files.  With a single line the config file is lazily loaded
+and cached, automatically choosing the current environment's hash.  It also supports a naming convention for overriding
+the official config file without source code changes.
 
 ## Installation
 
@@ -18,7 +20,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Simple loading of environment-namespaced config files with local overrides.
+
+    LiteConfig(:foobar)
+
+loads and caches the current environment section from:
+
+    config/foobar.yml
+
+The file must contain a yaml hash with environments for top-level keys.
+
+Config files can be overridden by adding '_local' to the filename:
+
+    config/foobar_local.yml
+
+Local overrides are intended for individual developer boxes and thus
+should be left out of version control.
+
+
+## TODO
+
+* Convert hash to OpenStruct for method-based access
+* Raise errors for undefined config keys
+* Support TOML or other config formats
+* Allow configuration of source directory
+* Allow multiple source directories
+
 
 ## Contributing
 
