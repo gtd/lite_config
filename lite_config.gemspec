@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = LiteConfig::VERSION
   spec.authors       = ["Gabe da Silveira"]
   spec.email         = ["gabe@websaviour.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Lightweight configuration for your app.  Supports open_struct style access, detects environments by default, for Rails, Rack or any other app.}
+  spec.summary       = %q{Lightweight configuration for your app}
   spec.homepage      = ""
   spec.license       = "MIT"
 
