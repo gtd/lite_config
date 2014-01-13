@@ -1,0 +1,10 @@
+development:
+  top_level:
+    deeper:
+      and_deeper: qux
+    stuff: foobar
+test:
+  top_level:
+    deeper:
+      and_deeper: testqux
+    stuff: testfoobar

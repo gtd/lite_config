@@ -1,6 +1,7 @@
 require "lite_config/version"
 
-require 'active_support/hash_with_indifferent_access'
+require 'active_support/core_ext/hash'
+
 require 'yaml'
 
 module LiteConfig

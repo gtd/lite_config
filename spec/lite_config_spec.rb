@@ -28,8 +28,17 @@ describe LiteConfig do
   end
 
   describe "nested config" do
-    it "should find nested keys"
-    it "should allow indifferent access"
+    before do
+      @config = LiteConfig(:nested)
+    end
+
+    it "should find nested keys" do
+      @config['top_level']['deeper']['and_deeper'].must_equal 'qux'
+    end
+
+    it "should allow indifferent access" do
+      @config[:top_level][:deeper][:and_deeper].must_equal 'qux'
+    end
   end
 
   describe "nested with array config" do
