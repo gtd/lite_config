@@ -39,10 +39,22 @@ describe LiteConfig do
     it "should allow indifferent access" do
       @config[:top_level][:deeper][:and_deeper].must_equal 'qux'
     end
-  end
 
-  describe "nested with array config" do
-    it "should allow indifferent access"
+    it "should allow arrays" do
+      @config[:top_level][:an_array][0].must_equal 'one'
+      @config[:top_level][:an_array][1].must_equal 'two'
+      @config[:top_level][:an_array][2].must_equal 'three'
+    end
+
+    it "should allow hashes in arrays" do
+      @config['top_level']['array_of_hashish'][0]['fu'].must_equal 'schnickens'
+      @config['top_level']['array_of_hashish'][0]['wu'].must_equal 'tang'
+    end
+
+    it "should allow hashes in arrays indifferently" do
+      @config[:top_level][:array_of_hashish][0][:fu].must_equal 'schnickens'
+      @config[:top_level][:array_of_hashish][0][:wu].must_equal 'tang'
+    end
   end
 
   describe "local_override config" do

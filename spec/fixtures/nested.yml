@@ -3,6 +3,15 @@ development:
     deeper:
       and_deeper: qux
     stuff: foobar
+    an_array:
+      - one
+      - two
+      - three
+    array_of_hashish:
+      - fu: schnickens
+        wu: tang
+      - br: and
+        nu: bians
 test:
   top_level:
     deeper:
