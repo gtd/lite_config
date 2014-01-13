@@ -1,6 +1,7 @@
 require "lite_config/version"
 
-require 'active_support/core_ext/hash'
+require 'active_support/core_ext/hash/deep_merge'
+require 'active_support/core_ext/hash/indifferent_access'
 
 require 'yaml'
 
