@@ -1,0 +1,6 @@
+development:
+  this: overrides the first string
+  other: is yet one more
+  inner:
+    one: baz
+    three: boo

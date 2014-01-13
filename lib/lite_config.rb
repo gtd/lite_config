@@ -28,9 +28,14 @@ module LiteConfig
   private
 
   def load(name)
-    filename = active_config_filename(name)
-    config = YAML.load_file(filename)[app_env]
+    config = YAML.load_file(config_filename(name))[app_env]
+
+    if File.exist?(local_config_filename(name))
+      config.deep_merge!(YAML.load_file(local_config_filename(name))[app_env])
+    end
+
     raise "Oops, no #{app_env} config found for #{name} in #{filename}" unless config
+
     config
   end
 
@@ -47,7 +52,6 @@ module LiteConfig
   end
 
   def active_config_filename(name)
-    File.exist?(local_config_filename(name)) ? local_config_filename(name) : config_filename(name)
   end
 
   def app_root

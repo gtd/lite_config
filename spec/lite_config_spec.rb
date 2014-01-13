@@ -58,9 +58,22 @@ describe LiteConfig do
   end
 
   describe "local_override config" do
-    it "should respect override"
-    it "should merge override params"
-    it "should merge deep override params"
+    before do
+      @config = LiteConfig(:override)
+    end
+
+    it "should respect override" do
+      @config[:this].must_equal "overrides the first string"
+    end
+
+    it "should merge override params" do
+      @config[:that].must_equal "is another string"
+    end
+
+    it "should merge deep override params" do
+      @config[:inner][:one].must_equal "baz"
+      @config[:inner][:two].must_equal "baw"
+    end
   end
 
   describe "environmentless config" do
