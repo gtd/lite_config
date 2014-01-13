@@ -28,15 +28,21 @@ module LiteConfig
   private
 
   def load(name)
-    config = YAML.load_file(config_filename(name))[app_env]
+    config = load_single(config_filename(name))
 
     if File.exist?(local_config_filename(name))
-      config.deep_merge!(YAML.load_file(local_config_filename(name))[app_env])
+      config.deep_merge!(load_single(local_config_filename(name)))
     end
 
     raise "Oops, no #{app_env} config found for #{name} in #{filename}" unless config
 
     config
+  end
+
+  def load_single(filename)
+    hash = YAML.load_file(filename)
+
+    has_environmenty_key?(hash) ? hash[app_env] : hash
   end
 
   def config_path
@@ -69,6 +75,10 @@ module LiteConfig
     else
       'development'
     end
+  end
+
+  def has_environmenty_key?(hash)
+    %w(development test production).any?{ |envy| hash.key?(envy) }
   end
 end
 

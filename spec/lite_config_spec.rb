@@ -77,6 +77,12 @@ describe LiteConfig do
   end
 
   describe "environmentless config" do
-    it "should use root level as config if keys do not look environmenty"
+    before do
+      @config = LiteConfig(:environmentless)
+    end
+
+    it "should use root level as config if keys do not look environmenty" do
+      @config[:red].must_equal 'fish'
+    end
   end
 end
