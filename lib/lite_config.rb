@@ -1,5 +1,6 @@
 require "lite_config/version"
 
+require 'active_support/hash_with_indifferent_access'
 require 'yaml'
 
 module LiteConfig
@@ -12,7 +13,7 @@ module LiteConfig
   def fetch(name)
     name = name.to_sym
     @configs ||= {}
-    @configs.key?(name) ? @configs[name] : (@configs[name] = load(name))
+    @configs.key?(name) ? @configs[name] : (@configs[name] = HashWithIndifferentAccess.new(load(name)))
   end
 
   private

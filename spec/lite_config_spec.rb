@@ -14,7 +14,10 @@ describe LiteConfig do
       @config['option'].must_equal 'dev'
     end
 
-    it "should allow indifferent access"
+    it "should allow indifferent access" do
+      @config[:option].must_equal 'dev'
+    end
+
     it "should allow method access"
   end
 
