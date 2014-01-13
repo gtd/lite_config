@@ -5,6 +5,10 @@ require 'yaml'
 module LiteConfig
   extend self
 
+  def set_config_path(path)
+    @config_path = path
+  end
+
   def fetch(name)
     name = name.to_sym
     @configs ||= {}
