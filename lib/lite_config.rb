@@ -4,16 +4,24 @@ require 'active_support/hash_with_indifferent_access'
 require 'yaml'
 
 module LiteConfig
-  extend self
+  class ImmutableError < StandardError; end
 
-  def set_config_path(path)
-    @config_path = path
-  end
+  extend self
 
   def fetch(name)
     name = name.to_sym
     @configs ||= {}
     @configs.key?(name) ? @configs[name] : (@configs[name] = HashWithIndifferentAccess.new(load(name)))
+  end
+
+  def set_config_path(path)
+    raise ImmutableError, "config_path is frozen after the first file load" unless @configs.nil?
+
+    @config_path = path
+  end
+
+  def reset
+    @configs = nil
   end
 
   private
