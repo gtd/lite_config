@@ -16,13 +16,13 @@ module LiteConfig
     @configs.key?(name) ? @configs[name] : (@configs[name] = HashWithIndifferentAccess.new(load(name)))
   end
 
-  def set_config_path(path)
+  def config_path=(path)
     raise ImmutableError, "config_path is frozen after the first file load" unless @configs.nil?
 
     @config_path = path
   end
 
-  def set_app_env(app_env)
+  def app_env=(app_env)
     raise ImmutableError, "app_env is frozen after the first file load" unless @configs.nil?
 
     @app_env = app_env

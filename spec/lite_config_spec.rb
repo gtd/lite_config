@@ -5,19 +5,19 @@ describe LiteConfig do
     LiteConfig.reset
   end
 
-  describe "set_config_path" do
+  describe "config_path=" do
     it "should fail after the first load" do
       LiteConfig(:basic)
 
-      proc { LiteConfig.set_config_path('foo') }.must_raise LiteConfig::ImmutableError
+      proc { LiteConfig.config_path = 'foo' }.must_raise LiteConfig::ImmutableError
     end
   end
 
-  describe "set_app_env" do
+  describe "app_env=" do
     it "should fail after the first load" do
       LiteConfig(:basic)
 
-      proc { LiteConfig.set_app_env('foo') }.must_raise LiteConfig::ImmutableError
+      proc { LiteConfig.app_env = 'foo' }.must_raise LiteConfig::ImmutableError
     end
   end
 

@@ -4,5 +4,5 @@ require 'debugger'
 
 require 'lite_config'
 
-LiteConfig.set_config_path(File.expand_path(__FILE__ + '/../fixtures'))
-LiteConfig.set_app_env('development')
+LiteConfig.config_path = File.expand_path(__FILE__ + '/../fixtures')
+LiteConfig.app_env = 'development'
