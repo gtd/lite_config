@@ -32,7 +32,9 @@ module LiteConfig
     config = load_single(config_filename(name))
 
     if File.exist?(local_config_filename(name))
-      config.deep_merge!(load_single(local_config_filename(name)))
+      local_config = load_single(local_config_filename(name))
+
+      config.deep_merge!(local_config) if local_config
     end
 
     raise "Oops, no #{app_env} config found for #{name} in #{filename}" unless config
@@ -79,7 +81,7 @@ module LiteConfig
   end
 
   def has_environmenty_key?(hash)
-    %w(development test production).any?{ |envy| hash.key?(envy) }
+    %w(development test production).any?{ |envy| hash.key?(envy) } if hash
   end
 end
 
