@@ -60,9 +60,6 @@ module LiteConfig
     config_filename(name).gsub(/.yml$/, '_local.yml')
   end
 
-  def active_config_filename(name)
-  end
-
   def app_root
     defined?(Rails) ? Rails.root : `pwd`.strip
   end
