@@ -96,6 +96,16 @@ describe LiteConfig do
     end
   end
 
+  describe "missing_environment_override config" do
+    before do
+      @config = LiteConfig(:missing_environment_override)
+    end
+
+    it "should load successfully" do
+      @config[:option].must_equal 'yet again empty'
+    end
+  end
+
   describe "environmentless config" do
     before do
       @config = LiteConfig(:environmentless)
