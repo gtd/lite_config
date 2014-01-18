@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = LiteConfig::VERSION
   spec.authors       = ["Gabe da Silveira"]
   spec.email         = ["gabe@websaviour.com"]
-  spec.description   = %q{Lightweight configuration for your app.  Supports open_struct style access, detects environments by default, for Rails, Rack or any other app.}
-  spec.summary       = %q{Lightweight configuration for your app}
+  spec.description   = %q{Lightweight configuration for your ruby app.  Reads Rails-style YAML files from your config directory.  Features include optional environment namespacing, local convention-based override files, and indifferent (symbol vs string) access.}
+  spec.summary       = %q{Lightweight configuration for your ruby app}
   spec.homepage      = ""
   spec.license       = "MIT"
 
