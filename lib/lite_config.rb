@@ -22,6 +22,12 @@ module LiteConfig
     @config_path = path
   end
 
+  def set_app_env(app_env)
+    raise ImmutableError, "app_env is frozen after the first file load" unless @configs.nil?
+
+    @app_env = app_env
+  end
+
   def reset
     @configs = nil
   end

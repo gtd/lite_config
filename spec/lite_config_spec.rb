@@ -13,6 +13,14 @@ describe LiteConfig do
     end
   end
 
+  describe "set_app_env" do
+    it "should fail after the first load" do
+      LiteConfig(:basic)
+
+      proc { LiteConfig.set_app_env('foo') }.must_raise LiteConfig::ImmutableError
+    end
+  end
+
   describe "basic config" do
     before do
       @config = LiteConfig(:basic)
