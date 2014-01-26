@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gtd/lite_config.png?branch=master)](https://travis-ci.org/gtd/lite_config)
 [![Code Climate](https://codeclimate.com/github/gtd/lite_config.png)](https://codeclimate.com/github/gtd/lite_config)
+[![Gem Version](https://badge.fury.io/rb/lite_config.png)](http://badge.fury.io/rb/lite_config)
 
 LiteConfig automates the loading of Rails-style YAML config files.  With a single line the config file is lazily loaded
 and cached, automatically choosing the current environment's hash.  It also supports local developer override via
