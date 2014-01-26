@@ -123,4 +123,10 @@ describe LiteConfig do
       @config[:red].must_equal 'fish'
     end
   end
+
+  describe "config not present" do
+    it "should raise exception" do
+      lambda{ LiteConfig(:not_even_a_real_config) }.must_raise LiteConfig::NotFoundError
+    end
+  end
 end

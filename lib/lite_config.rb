@@ -7,6 +7,7 @@ require 'yaml'
 
 module LiteConfig
   class ImmutableError < StandardError; end
+  class NotFoundError < StandardError; end
 
   extend self
 
@@ -35,15 +36,17 @@ module LiteConfig
   private
 
   def load(name)
-    config = load_single(config_filename(name))
+    if File.exist?(config_filename(name))
+      config = load_single(config_filename(name))
+    else
+      raise NotFoundError, "No config found for #{name}"
+    end
 
     if File.exist?(local_config_filename(name))
       local_config = load_single(local_config_filename(name))
 
       config.deep_merge!(local_config) if local_config
     end
-
-    raise "Oops, no #{app_env} config found for #{name} in #{filename}" unless config
 
     config
   end
