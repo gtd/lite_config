@@ -1,3 +1,7 @@
+### Pending
+
+* Remove ActiveSupport dependency (Sergio Tulentsev)
+
 ### Version 0.0.3
 
 * Fix error on missing config (thanks RKushnir)

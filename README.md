@@ -105,7 +105,6 @@ changed after the first config file is loaded as that could lead to the wrong da
 ## Future Ideas
 
 * Convert LiteConfig to an insantiable class instead of a singleton
-* Remove ActiveSupport dependency
 * Ability to raise errors for undefined config keys
 * Support TOML or other config formats
 * Allow OpenStruct-like access to the config.  I'm not 100% sure on the ROI of this feature.

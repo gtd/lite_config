@@ -1,7 +1,7 @@
 require "lite_config/version"
 
-require 'active_support/core_ext/hash/deep_merge'
-require 'active_support/core_ext/hash/indifferent_access'
+require 'lite_config/hash'
+require 'lite_config/hash_with_indifferent_access'
 
 require 'yaml'
 
@@ -14,7 +14,7 @@ module LiteConfig
   def fetch(name)
     name = name.to_sym
     @configs ||= {}
-    @configs.key?(name) ? @configs[name] : (@configs[name] = HashWithIndifferentAccess.new(load(name)))
+    @configs.key?(name) ? @configs[name] : (@configs[name] = IndifferentHash.new(load(name)))
   end
 
   def config_path=(path)
