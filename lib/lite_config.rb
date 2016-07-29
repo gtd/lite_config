@@ -4,6 +4,7 @@ require 'lite_config/hash'
 require 'lite_config/hash_with_indifferent_access'
 
 require 'yaml'
+require 'erb'
 
 module LiteConfig
   class ImmutableError < StandardError; end
@@ -36,7 +37,9 @@ module LiteConfig
   private
 
   def load(name)
-    if File.exist?(config_filename(name))
+    if File.exist?(template_filename(name))
+      config = load_single(template_filename(name), true)
+    elsif File.exist?(config_filename(name))
       config = load_single(config_filename(name))
     else
       raise NotFoundError, "No config found for #{name}"
@@ -51,14 +54,22 @@ module LiteConfig
     config
   end
 
-  def load_single(filename)
-    hash = YAML.load_file(filename)
+  def load_single(filename, is_template = false)
+    if is_template
+      hash = YAML.load(ERB.new(IO.read(filename)).result)
+    else
+      hash = YAML.load_file(filename)
+    end
 
     has_environmenty_key?(hash) ? hash[app_env] : hash
   end
 
   def config_path
     @config_path ||= File.join(app_root, 'config')
+  end
+
+  def template_filename(name)
+    "#{config_filename(name)}.erb"
   end
 
   def config_filename(name)

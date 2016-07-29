@@ -35,6 +35,16 @@ describe LiteConfig do
     end
   end
 
+  describe "erb template config" do
+    before do
+      @config = LiteConfig(:template)
+    end
+
+    it "should find evaluated keys" do
+      @config['option'].must_equal 2
+    end
+  end
+
   describe "nested config" do
     before do
       @config = LiteConfig(:nested)
