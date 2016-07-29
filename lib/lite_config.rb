@@ -37,14 +37,14 @@ module LiteConfig
   private
 
   def load(name)
-    if filename = get_filename(config_filename(name))
-      config = load_single(filename)
+    if File.exist?(config_filename(name))
+      config = load_single(config_filename(name))
     else
       raise NotFoundError, "No config found for #{name}"
     end
 
-    if filename = get_filename(local_config_filename(name))
-      local_config = load_single(filename)
+    if File.exist?(local_config_filename(name))
+      local_config = load_single(local_config_filename(name))
 
       config.deep_merge!(local_config) if local_config
     end
@@ -53,7 +53,7 @@ module LiteConfig
   end
 
   def load_single(filename)
-    hash = if File.extname(filename) == '.erb'
+    hash = if erb?(filename)
       YAML.load ERB.new(IO.read(filename)).result
     else
       YAML.load_file filename
@@ -66,22 +66,18 @@ module LiteConfig
     @config_path ||= File.join(app_root, 'config')
   end
 
-  def get_filename(filename)
-    filename_with_erb = filename + '.erb'
-
-    if File.exist?(filename)
-      filename
-    elsif File.exist?(filename_with_erb)
-      filename_with_erb
-    end
-  end
-
   def config_filename(name)
-    File.join(config_path, name.to_s + '.yml')
+    name = File.join(config_path, name.to_s + '.yml')
+    name << '.erb' if erb?(name)
+    name
   end
 
   def local_config_filename(name)
     config_filename(name).gsub(/.yml$/, '_local.yml')
+  end
+
+  def erb?(name)
+    File.exist?(name + '.erb') || File.extname(name) == '.erb'
   end
 
   def app_root
