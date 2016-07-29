@@ -35,6 +35,16 @@ describe LiteConfig do
     end
   end
 
+  describe "basic_erb config" do
+    before do
+      @config = LiteConfig(:basic_erb)
+    end
+
+    it "should find evaluated keys" do
+      @config[:option].must_equal 2
+    end
+  end
+
   describe "nested config" do
     before do
       @config = LiteConfig(:nested)
