@@ -53,7 +53,7 @@ module LiteConfig
   end
 
   def load_single(filename)
-    hash = if erb?(filename)
+    hash = if File.extname(filename) == '.erb'
       YAML.load ERB.new(IO.read(filename)).result
     else
       YAML.load_file filename
@@ -67,17 +67,13 @@ module LiteConfig
   end
 
   def config_filename(name)
-    name = File.join(config_path, name.to_s + '.yml')
-    name << '.erb' if erb?(name)
-    name
+    filename = File.join(config_path, name.to_s + '.yml')
+    filename << '.erb' if File.exist?(filename + '.erb')
+    filename
   end
 
   def local_config_filename(name)
     config_filename(name).gsub(/.yml$/, '_local.yml')
-  end
-
-  def erb?(name)
-    File.exist?(name + '.erb') || File.extname(name) == '.erb'
   end
 
   def app_root
