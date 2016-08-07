@@ -4,6 +4,7 @@ require 'lite_config/hash'
 require 'lite_config/hash_with_indifferent_access'
 
 require 'yaml'
+require 'erb'
 
 module LiteConfig
   class ImmutableError < StandardError; end
@@ -52,7 +53,11 @@ module LiteConfig
   end
 
   def load_single(filename)
-    hash = YAML.load_file(filename)
+    hash = if File.extname(filename) == '.erb'
+      YAML.load ERB.new(IO.read(filename)).result
+    else
+      YAML.load_file filename
+    end
 
     has_environmenty_key?(hash) ? hash[app_env] : hash
   end
@@ -62,7 +67,9 @@ module LiteConfig
   end
 
   def config_filename(name)
-    File.join(config_path, name.to_s + '.yml')
+    filename = File.join(config_path, name.to_s + '.yml')
+    filename << '.erb' if File.exist?(filename + '.erb')
+    filename
   end
 
   def local_config_filename(name)
