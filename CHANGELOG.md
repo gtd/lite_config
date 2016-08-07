@@ -1,5 +1,6 @@
-### Pending
+### Version 0.0.4
 
+* Allow ERB-processed config files (Federico Keen, Andy Dust)
 * Remove ActiveSupport dependency (Sergio Tulentsev)
 
 ### Version 0.0.3
