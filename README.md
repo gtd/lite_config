@@ -51,6 +51,19 @@ you can do:
 
 Of course any valid YAML will work, but it works particularly nicely with simple hashes and arrays.
 
+#### ERB Config Files
+
+You might want part of your config file to be dynamic, the most obvious use of
+which would be to inject secrets from an environment variables.  You do so by
+adding an `.erb` extension to the file.  For instance if you have the file
+`config/options.yml.erb` you could pull in a secret key from the environment
+like this:
+
+    development:
+      secret_key: abc123
+    production:
+      secret_key: <%= ENV['SECRET_KEY'] %>
+
 #### Flat Config Files
 
 Do you ever cringe when your config file uses advanced YAML features do duplicate the exact same hash for every
